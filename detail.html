@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sách - Thư viện THPT Nguyễn Hữu Cảnh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER / MENU -->
+    <header class="header" id="home">
+        <div class="header-top">
+            <div class="logo">
+                <i class="fas fa-book-reader"></i>
+                <h1>THƯ VIỆN THPT NGUYỄN HỮU CẢNH</h1>
+            </div>
+            <div class="user-actions">
+                <span class="welcome-text">Xin chào, Bạn đọc</span>
+            </div>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Trang chủ</a></li>
+                <li><a href="index.html#intro"><i class="fas fa-info-circle"></i> Giới thiệu</a></li>
+                <li><a href="books.html" class="active"><i class="fas fa-list"></i> Danh mục sách</a></li>
+                <li><a href="index.html#borrow"><i class="fas fa-exchange-alt"></i> Mượn / Trả</a></li>
+                <li><a href="index.html#rules"><i class="fas fa-gavel"></i> Nội quy</a></li>
+                <li><a href="index.html#contact"><i class="fas fa-phone"></i> Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- LEFT SIDEBAR (Minimal) -->
+        <aside class="sidebar sidebar-left">
+            <div class="card">
+                <div class="card-body">
+                    <a href="books.html"
+                        style="display:block; color: var(--primary-color); font-weight:bold; margin-bottom: 10px;">
+                        <i class="fas fa-arrow-left"></i> Quay lại danh mục
+                    </a>
+                    <a href="index.html" style="display:block; color: var(--text-light);">
+                        <i class="fas fa-home"></i> Về trang chủ
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT (Detail View) -->
+        <main class="main-content" style="grid-column: span 2;"> <!-- Make it wider -->
+
+            <section class="card box-detail" id="bookDetailContainer">
+                <!-- Content injected by JS -->
+                <div style="padding: 50px; text-align: center;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem;"></i> Đang tải dữ liệu...
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container"></div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Thư viện Trường THPT Nguyễn Hữu Cảnh. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Inline init for detail page
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if we have an app instance (script.js should expose it or we create one)
+            const app = new LibraryManager();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookId = urlParams.get('id');
+
+            if (!bookId) {
+                document.getElementById('bookDetailContainer').innerHTML = '<div style="padding:20px; color:red;">Không tìm thấy mã sách!</div>';
+                return;
+            }
+
+            const book = app.findBook(bookId);
+            if (!book) {
+                document.getElementById('bookDetailContainer').innerHTML = '<div style="padding:20px; color:red;">Sách không tồn tại hoặc đã bị xóa.</div>';
+                return;
+            }
+
+            // Render Detail View
+            const statusClass = book.status === 'Còn' ? 'available' : 'borrowed';
+            const statusText = book.status === 'Còn' ? 'Sẵn có' : `Đang mượn`;
+            const statusColor = book.status === 'Còn' ? 'var(--success-color)' : 'var(--error-color)';
+
+            const html = `
+                <div class="card-header">
+                    <h3><i class="fas fa-book-open"></i> Chi tiết sách: ${book.id}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="detail-grid" style="display: grid; grid-template-columns: 300px 1fr; gap: 30px;">
+                        <div class="detail-left">
+                            <img src="${book.image}" alt="${book.name}" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                            <div style="margin-top: 20px;">
+                                <button class="btn-primary" onclick="requestBorrow('${book.id}')" style="width: 100%; margin-bottom: 10px;">
+                                    <i class="fas fa-bookmark"></i> Mượn Sách Này
+                                </button>
+                            </div>
+                        </div>
+                        <div class="detail-right">
+                            <h1 style="color: var(--secondary-color); font-size: 2rem; margin-bottom: 10px;">${book.name}</h1>
+                            <p style="font-size: 1.1rem; color: #555; margin-bottom: 5px;"><strong>Tác giả:</strong> ${book.author}</p>
+                            <p style="font-size: 1rem; color: #777; margin-bottom: 5px;"><strong>Thể loại:</strong> ${book.category}</p>
+                            <p style="font-size: 1rem; margin-bottom: 20px;">
+                                <strong>Tình trạng:</strong> 
+                                <span style="font-weight: bold; color: ${statusColor}; border: 1px solid ${statusColor}; padding: 2px 8px; border-radius: 4px;">${statusText}</span>
+                            </p>
+                            
+                            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                            
+                            <h3>Giới thiệu nội dung</h3>
+                            <p style="line-height: 1.8; color: #333; margin-bottom: 30px;">
+                                ${book.description}
+                            </p>
+
+                            <h3>Đọc thử</h3>
+                            <div class="reader-view" style="background: #fdf6e3; padding: 20px; border-radius: 8px; border: 1px solid #ddd; max-height: 400px; overflow-y: auto;">
+                                ${book.content}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('bookDetailContainer').innerHTML = html;
+        });
+
+        // Global function for the button
+        function requestBorrow(id) {
+            const name = prompt("Nhập tên người mượn để xác nhận:");
+            if (name) {
+                const app = new LibraryManager();
+                const res = app.borrowBook(id, name);
+                if (res.success) {
+                    showToast(res.message, 'success');
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    showToast(res.message, 'error');
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

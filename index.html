@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư viện THPT Nguyễn Hữu Cảnh</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER / MENU -->
+    <header class="header" id="home">
+        <div class="header-top">
+            <div class="logo">
+                <i class="fas fa-book-reader"></i>
+                <h1>THƯ VIỆN THPT NGUYỄN HỮU CẢNH</h1>
+            </div>
+            <div class="user-actions">
+                <span class="welcome-text">Xin chào, Bạn đọc</span>
+            </div>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#home" class="active"><i class="fas fa-home"></i> Trang chủ</a></li>
+                <li><a href="#intro"><i class="fas fa-info-circle"></i> Giới thiệu</a></li>
+                <li><a href="books.html"><i class="fas fa-list"></i> Danh mục sách</a></li>
+                <li><a href="#borrow"><i class="fas fa-exchange-alt"></i> Mượn / Trả</a></li>
+                <li><a href="#rules"><i class="fas fa-gavel"></i> Nội quy</a></li>
+                <li><a href="#contact"><i class="fas fa-phone"></i> Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar sidebar-left">
+            <div class="card box-notification" id="intro">
+                <div class="card-header">
+                    <h3><i class="fas fa-bullhorn"></i> Thông báo</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="info-list">
+                        <li><i class="far fa-clock"></i> <strong>Giờ mở cửa:</strong><br> 07:30 – 16:30 (T2–T6)</li>
+                        <li><i class="fas fa-user-graduate"></i> <strong>Học sinh:</strong><br> Tối đa 02 cuốn / 07 ngày
+                        </li>
+                        <li><i class="fas fa-chalkboard-teacher"></i> <strong>Giáo viên:</strong><br> 10 cuốn / 1 tháng
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card box-image">
+                <div class="card-header">
+                    <h3><i class="fas fa-image"></i> Hình ảnh thư viện</h3>
+                </div>
+                <div class="card-body">
+                    <img src="https://png.pngtree.com/thumb_back/fh260/background/20210908/pngtree-library-noon-library-environment-photography-bookstore-learning-photography-map-with-map-image_829742.jpg"
+                        alt="Thư viện THPT Nguyễn Hữu Cảnh">
+                    <p class="caption">Không gian đọc sách yên tĩnh, thoáng mát.</p>
+                </div>
+            </div>
+
+            <div class="card box-rules" id="rules">
+                <div class="card-header">
+                    <h3><i class="fas fa-clipboard-list"></i> Nội quy rút gọn</h3>
+                </div>
+                <div class="card-body">
+                    <ol class="rules-list">
+                        <li>Giữ yên tĩnh, tôn trọng không gian chung.</li>
+                        <li>Không mang đồ ăn, thức uống vào thư viện.</li>
+                        <li>Trả sách đúng hạn (<span class="highlight">Phạt 1.000đ/ngày trễ</span>).</li>
+                        <li>Sử dụng máy tính đúng mục đích học tập.</li>
+                        <li>Giữ gìn sách, báo cáo nếu sách hư hỏng.</li>
+                    </ol>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN DATA -->
+        <main class="main-content">
+
+            <!-- Danh mục sách SUMMARY -->
+            <section class="card box-books" id="books">
+                <div class="card-header">
+                    <h3><i class="fas fa-book"></i> Danh mục sách nổi bật</h3>
+                </div>
+                <div class="card-body" style="text-align: center; padding: 30px;">
+                    <i class="fas fa-book-open"
+                        style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                    <p>Hiện tại thư viện đang có hàng trăm đầu sách thú vị chờ bạn khám phá.</p>
+                    <br>
+                    <a href="books.html" class="btn-primary" style="display: inline-block; width: auto;">
+                        <i class="fas fa-list"></i> Xem toàn bộ danh sách sách
+                    </a>
+                </div>
+            </section>
+
+            <!-- Phiếu mượn trả -->
+            <section class="card box-borrow" id="borrow">
+                <div class="card-header">
+                    <h3><i class="fas fa-edit"></i> Phiếu mượn / trả (Mẫu)</h3>
+                </div>
+                <div class="card-body">
+                    <form class="form-custom" id="borrowForm">
+                        <div class="form-group">
+                            <label><strong>Họ tên học sinh</strong></label>
+                            <div class="input-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" placeholder="Ví dụ: Nguyễn Văn A" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><strong>Mã sách</strong></label>
+                            <div class="input-icon">
+                                <i class="fas fa-barcode"></i>
+                                <input type="text" placeholder="Ví dụ: BK001" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><strong>Hình thức</strong></label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="ht" value="muon" checked>
+                                    <span>Mượn sách</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="ht" value="tra">
+                                    <span>Trả sách</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Gửi phiếu <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Thêm sách -->
+            <section class="card box-add-book">
+                <div class="card-header">
+                    <h3><i class="fas fa-plus-circle"></i> Thêm sách mới</h3>
+                </div>
+                <div class="card-body">
+                    <form class="form-inline" id="addBookForm">
+                        <input type="text" placeholder="Tên sách" required>
+                        <input type="text" placeholder="Tác giả">
+                        <button type="submit" class="btn-success">Thêm sách</button>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="sidebar sidebar-right">
+
+            <div class="card box-search">
+                <div class="card-header">
+                    <h3><i class="fas fa-search"></i> Tìm kiếm</h3>
+                </div>
+                <div class="card-body">
+                    <div class="search-bar">
+                        <input type="text" placeholder="VD: CSS, truyện...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card box-contact" id="contact">
+                <div class="card-header">
+                    <h3><i class="fas fa-address-book"></i> Liên hệ thủ thư</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="contact-list">
+                        <li><i class="fas fa-envelope"></i> thuvien@school.edu.vn</li>
+                        <li><i class="fas fa-phone-alt"></i> 123 456 789</li>
+                    </ul>
+                    <p class="note">Hãy liên hệ nếu bạn cần hỗ trợ thêm!</p>
+                </div>
+            </div>
+
+            <div class="card box-quote">
+                <div class="card-header">
+                    <h3><i class="fas fa-quote-left"></i> Góc trích dẫn</h3>
+                </div>
+                <div class="card-body quote-content">
+                    <blockquote>
+                        "Mỗi cuốn sách là một giấc mơ bạn cầm trên tay."
+                    </blockquote>
+                    <cite>- Neil Gaiman</cite>
+                    <div class="social-link">
+                        <strong>Fanpage: <a href="http://nhc.edu.vn/" target="_blank">THPT Nguyễn Hữu Cảnh</a></strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTIVITY LOG -->
+            <div class="card box-activity">
+                <div class="card-header">
+                    <h3><i class="fas fa-history"></i> Hoạt động gần đây</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="activity-list" id="activityLog">
+                        <!-- Logs rendered by JS -->
+                        <li style="color: #999; font-style: italic;">Chưa có hoạt động nào.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card box-members">
+                <div class="card-header">
+                    <h3><i class="fas fa-users"></i> Thành viên tổ 4</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="member-list">
+                        <li><span>1.</span> Lê Nguyễn Khánh Ly</li>
+                        <li><span>2.</span> Phạm Thị Lan Anh</li>
+                        <li><span>3.</span> Hà Hoàng Phương Linh</li>
+                        <li><span>4.</span> Mai Yến Nhi</li>
+                        <li><span>5.</span> Nguyễn Trần Hiền Anh</li>
+                        <li><span>6.</span> Hoàng Ngọc Mai Khanh</li>
+                        <li><span>7.</span> Trần Thị Như Ngọc</li>
+                        <li><span>8.</span> Nguyễn Thị Diệu Anh</li>
+                        <li><span>9.</span> Hoàng Sao Mai</li>
+                        <li><span>10.</span> Nguyễn Phú Thịnh</li>
+                        <li><span>11.</span> Nguyễn Xuân Tùng</li>
+                    </ul>
+                </div>
+            </div>
+
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Thư viện Trường THPT Nguyễn Hữu Cảnh. All rights reserved.</p>
+        <p>Tổ 4 - Lớp 12A4</p>
+    </footer>
+
+
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
